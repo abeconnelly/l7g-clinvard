@@ -30,7 +30,12 @@ func (lvcvd *LVCVD) SQLExec(req string) ([][]string, error ) {
 
   rawResult := make([][]byte, len(cols))
 
+
   res_str_array := [][]string{}
+
+  // add column names to first row
+  //
+  res_str_array = append(res_str_array, cols)
 
   dest := make([]interface{}, len(cols))
   for i,_ := range rawResult {
@@ -50,7 +55,9 @@ func (lvcvd *LVCVD) SQLExec(req string) ([][]string, error ) {
         result[i] = string(raw)
 
         //DEBUG
-        fmt.Printf("raw>>>>\n%v\n", string(raw))
+        if local_debug {
+          fmt.Printf("raw>>>>\n%v\n", string(raw))
+        }
 
       }
     }
@@ -60,7 +67,9 @@ func (lvcvd *LVCVD) SQLExec(req string) ([][]string, error ) {
   }
 
   //DEBUG
-  fmt.Printf(">>>>\n%v\n", res_str_array)
+  if local_debug {
+    fmt.Printf(">>>>\n%v\n", res_str_array)
+  }
 
   return res_str_array, nil
 }

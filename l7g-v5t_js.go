@@ -16,33 +16,6 @@ func (lvcvd *LVCVD) status_otto(call otto.FunctionCall) otto.Value {
   return v
 }
 
-func (lvcvd *LVCVD) sqlexec_otto_varg(call otto.FunctionCall) otto.Value {
-  otto_err,err := otto.ToValue("error")
-  if err!=nil { return otto.Value{} }
-
-  sqlstr := call.Argument(0).String()
-  ofmt := call.Argument(1).String() ; _ = ofmt
-
-  sql_ret,e := lvcvd.SQLExec(sqlstr)
-  if e!=nil {
-
-    //DEBUG
-    fmt.Printf(">>>> sql error: %v\n", e)
-
-    errstr := fmt.Sprint("%v", e)
-    oerr,e := otto.ToValue(errstr)
-    if e!=nil { return otto_err }
-    return oerr
-  }
-
-  s := _strstr_to_json(sql_ret)
-
-  v,e := otto.ToValue(s)
-  if e!=nil { return otto_err }
-
-  return v
-}
-
 func (lvcvd *LVCVD) sqlexec_otto(call otto.FunctionCall) otto.Value {
   otto_err,err := otto.ToValue("error")
   if err!=nil { return otto.Value{} }

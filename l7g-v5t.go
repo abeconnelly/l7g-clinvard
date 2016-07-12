@@ -17,6 +17,12 @@ func (lvcvd *LVCVD) Init(sql_fn string) error {
 }
 
 func (lvcvd *LVCVD) SQLExec(req string) ([][]string, error ) {
+  local_debug := true
+
+  if local_debug {
+    fmt.Printf("SQLExec: request: \"%s\"\n", req)
+  }
+
   rows,err := lvcvd.DB.Query(req)
   if err!=nil { return nil, err }
   cols,e := rows.Columns() ; _ = cols

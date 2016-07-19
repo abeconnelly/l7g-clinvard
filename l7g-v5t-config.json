@@ -1,0 +1,4 @@
+{
+  "database":"./l7g-v5t-clinvar.sqlite3",
+  "port":8084
+}

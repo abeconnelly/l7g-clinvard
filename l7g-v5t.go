@@ -91,8 +91,6 @@ func main() {
 
   lvcvd.Port = int(config_json.O["port"].P)
 
-  //err := lvcvd.Init("./l7g-v5t-clinvar.sqlite3")
-  //if err!=nil { panic(err) }
   err := lvcvd.Init(config_json.O["database"].S)
   if err!=nil { log.Fatal(err) }
 
@@ -101,7 +99,5 @@ func main() {
   }
 
   err = lvcvd.StartSrv()
-  //if err!=nil { panic(err) }
   if err!=nil { log.Fatal(err) }
-
 }

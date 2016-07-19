@@ -60,7 +60,6 @@ func (lvcvd *LVCVD) StartSrv() error {
 
   port_str := fmt.Sprintf("%d", lvcvd.Port)
 
-  //e := http.ListenAndServe(":8084", nil)
   e := http.ListenAndServe(":" + port_str, nil)
   return e
 }

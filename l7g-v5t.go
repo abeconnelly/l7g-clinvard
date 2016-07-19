@@ -1,11 +1,16 @@
 package main
 
 import "fmt"
+import "log"
+import "io/ioutil"
 import "database/sql"
 import _ "github.com/mattn/go-sqlite3"
 
+import "github.com/abeconnelly/sloppyjson"
+
 type LVCVD struct {
   DB *sql.DB
+  Port int
 }
 
 
@@ -78,14 +83,25 @@ func main() {
   local_debug := true
   lvcvd := LVCVD{}
 
-  err := lvcvd.Init("./l7g-v5t-clinvar.sqlite3")
-  if err!=nil { panic(err) }
+  config_fn := "./l7g-v5t-config.json"
+  config_str,e := ioutil.ReadFile(config_fn)
+  if e!=nil { log.Fatal(e) }
+  config_json,e := sloppyjson.Loads(string(config_str))
+  if e!=nil { log.Fatal(e) }
+
+  lvcvd.Port = int(config_json.O["port"].P)
+
+  //err := lvcvd.Init("./l7g-v5t-clinvar.sqlite3")
+  //if err!=nil { panic(err) }
+  err := lvcvd.Init(config_json.O["database"].S)
+  if err!=nil { log.Fatal(err) }
 
   if local_debug {
     fmt.Printf(">> starting\n")
   }
 
   err = lvcvd.StartSrv()
-  if err!=nil { panic(err) }
+  //if err!=nil { panic(err) }
+  if err!=nil { log.Fatal(err) }
 
 }

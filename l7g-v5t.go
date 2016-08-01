@@ -1,5 +1,6 @@
 package main
 
+import "os"
 import "fmt"
 import "log"
 import "io/ioutil"
@@ -84,6 +85,10 @@ func main() {
   lvcvd := LVCVD{}
 
   config_fn := "./l7g-v5t-config.json"
+  if len(os.Args)>1 {
+    config_fn = os.Args[1]
+  }
+
   config_str,e := ioutil.ReadFile(config_fn)
   if e!=nil { log.Fatal(e) }
   config_json,e := sloppyjson.Loads(string(config_str))

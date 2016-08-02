@@ -12,6 +12,7 @@ import "github.com/abeconnelly/sloppyjson"
 type LVCVD struct {
   DB *sql.DB
   HTMLDir string
+  JSDir string
   Port int
 }
 
@@ -97,6 +98,7 @@ func main() {
 
   lvcvd.Port = int(config_json.O["port"].P)
   lvcvd.HTMLDir = config_json.O["html-dir"].S
+  lvcvd.JSDir = config_json.O["js-dir"].S
 
   err := lvcvd.Init(config_json.O["database"].S)
   if err!=nil { log.Fatal(err) }

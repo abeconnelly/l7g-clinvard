@@ -1,5 +1,6 @@
 {
   "database":"./l7g-v5t-clinvar.sqlite3",
   "html-dir":"./html",
+  "js-dir":"./js",
   "port":8084
 }

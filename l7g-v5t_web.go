@@ -25,13 +25,13 @@ func (lvcvd *LVCVD) WebDefault(w http.ResponseWriter, req *http.Request) {
 }
 
 func (lvcvd *LVCVD) WebAbout(w http.ResponseWriter, req *http.Request) {
-  str,e := ioutil.ReadFile("html/about.html")
+  str,e := ioutil.ReadFile( lvcvd.HTMLDir + "/about.html")
   if e!=nil { io.WriteString(w, "error") ; return }
   io.WriteString(w, string(str))
 }
 
 func (lvcvd *LVCVD) WebInteractive(w http.ResponseWriter, req *http.Request) {
-  str,e := ioutil.ReadFile("html/index.html")
+  str,e := ioutil.ReadFile( lvcvd.HTMLDir + "/index.html")
   if e!=nil { io.WriteString(w, "error") ; return }
   io.WriteString(w, string(str))
 }

@@ -55,8 +55,11 @@ func (lvcvd *LVCVD) WebExec(w http.ResponseWriter, req *http.Request) {
 func (lvcvd *LVCVD) StartSrv() error {
   http.HandleFunc("/", lvcvd.WebDefault)
   http.HandleFunc("/exec", lvcvd.WebExec)
+  http.HandleFunc("/exec/", lvcvd.WebExec)
   http.HandleFunc("/about", lvcvd.WebAbout)
+  http.HandleFunc("/about/", lvcvd.WebAbout)
   http.HandleFunc("/i", lvcvd.WebInteractive)
+  http.HandleFunc("/i/", lvcvd.WebInteractive)
 
   port_str := fmt.Sprintf("%d", lvcvd.Port)
 
